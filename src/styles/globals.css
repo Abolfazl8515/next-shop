@@ -24,6 +24,7 @@
   --color-secondary-200: rgb(220, 225, 220);
   --color-secondary-100: rgb(235, 240, 235);
   --color-secondary-50: rgb(245, 248, 245);
+  --color-secondary-0: rgb(255, 255, 255);
 
   --color-success: rgb(56, 142, 60);
   --color-warning: rgb(255, 179, 0);
@@ -40,4 +41,67 @@ body {
   min-height: 100vh;
   user-select: none;
   background-color: rgb(var(--background-app-rgb));
+}
+
+.form {
+  @apply flex flex-col gap-y-8 bg-secondary-0 p-4 rounded-xl w-full max-w-lg;
+}
+.textField__input {
+  @apply w-full py-3 px-4 rounded-xl text-secondary-900 border border-secondary-100 bg-secondary-100 hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;
+}
+.btn {
+  @apply px-3 py-3 rounded-xl transition-all duration-300;
+}
+.btn--primary {
+  @apply bg-primary-900 hover:bg-primary-700 text-secondary-100;
+}
+.btn--secondary {
+  @apply bg-secondary-600 text-secondary-100;
+}
+.btn--outline {
+  @apply border border-secondary-300 text-secondary-400;
+}
+.btn--danger {
+  @apply border border-rose-700 text-rose-700;
+}
+.badge {
+  @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5;
+}
+.badge--primary {
+  @apply bg-primary-900 text-white;
+}
+.badge--secondary {
+  @apply bg-secondary-200 text-secondary-600;
+}
+.badge--success {
+  @apply bg-green-500 text-white;
+}
+.badge--danger {
+  @apply bg-red-500 text-white;
+}
+
+.spinner {
+  margin: 3.2rem auto 1.6rem;
+  width: 60px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid rgb(var(--color-primary-900));
+  border-right-color: rgb(var(--color-primary-200));
+  animation: rotate 1s infinite linear;
+}
+
+.spinner-mini {
+  margin: 0 auto;
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid rgb(var(--color-primary-900));
+  border-right-color: transparent;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
 }

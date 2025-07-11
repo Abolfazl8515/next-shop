@@ -1,4 +1,5 @@
 import vazirFont from "@/constants/localFont";
+import AuthProvider from "@/context/AuthProvider";
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -12,8 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirFont.className} font-sans min-h-screen w-full flex flex-col items-center`}>
-        {children}
+      <body
+        className={`${vazirFont.className} font-sans min-h-screen w-full flex flex-col items-center`}
+      >
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

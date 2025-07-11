@@ -1,0 +1,182 @@
+"use client";
+import {
+  checkUserOtpApi,
+  completeUserProfileApi,
+  getUserApi,
+  getUserOtpApi,
+} from "@/services/authService";
+import { useRouter } from "next/navigation";
+import { createContext, use, useEffect, useReducer } from "react";
+import toast from "react-hot-toast";
+
+const GET_OTP = "get/otp";
+const CHECK_OTP = "check/otp";
+const COMPLETE_PROFILE = "complete/profile";
+const USER_LOADED = "user/loaded";
+const REJECTED = "rejected";
+const LOADING = "loading";
+const LOGOUT = "logout";
+
+const AuthContext = createContext();
+
+const initialState = {
+  user: null,
+  isAuthenticated: false,
+  isLoading: true,
+  error: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    case GET_OTP:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case CHECK_OTP:
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+      };
+    case COMPLETE_PROFILE:
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+      };
+    case USER_LOADED:
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+      };
+    case LOGOUT:
+      return {
+        ...initialState,
+        isLoading: false,
+      };
+
+    default:
+      throw new Error("unknown action!");
+  }
+};
+
+export default function AuthProvider({ children }) {
+  const [{ user, isAuthenticated, isLoading }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
+  const router = useRouter();
+
+  const getOtp = async (values) => {
+    dispatch({ type: LOADING });
+    try {
+      const { message } = getUserOtpApi(values);
+      dispatch({ type: GET_OTP });
+      router.push("/signin/check-otp");
+      toast(message, {
+        icon: "ℹ️",
+      });
+    } catch (error) {
+      const errMsg = error?.response?.data?.message;
+      dispatch({ type: REJECTED, payload: errMsg });
+      toast.error(errMsg);
+    }
+  };
+
+  const checkOtp = async (values) => {
+    dispatch({ type: LOADING });
+    try {
+      const { message, user } = checkUserOtpApi(values);
+      dispatch({ type: CHECK_OTP, payload: user });
+      router.push("/signin/complete-profile");
+      toast.success(message);
+    } catch (error) {
+      const errMsg = error?.response?.data?.message;
+      dispatch({ type: REJECTED, payload: errMsg });
+      toast.error(errMsg);
+    }
+  };
+
+  const completeProfile = async (values) => {
+    dispatch({ type: LOADING });
+    try {
+      const { message, user } = completeUserProfileApi(values);
+      dispatch({ type: COMPLETE_PROFILE, payload: user });
+      router.replace("/");
+      toast.success(message);
+    } catch (error) {
+      const errMsg = error?.response?.data?.message;
+      dispatch({ type: REJECTED, payload: errMsg });
+      toast.error(errMsg);
+    }
+  };
+
+  const getUser = async () => {
+    dispatch({ type: LOADING });
+    try {
+      const { user } = await getUserApi();
+      dispatch({ type: USER_LOADED, payload: user });
+    } catch (error) {
+      const errorMsg = error?.response?.data?.message;
+      dispatch({ type: REJECTED, payload: errorMsg });
+      toast.error(errorMsg);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await logoutApi();
+      dispatch({ type: LOGOUT });
+      router.replace("/");
+      router.refresh();
+      toast("شما از حساب خود خارج شدید", {
+        icon: "ℹ️",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      getUser();
+    };
+    fetchUser();
+  }, []);
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated,
+        isLoading,
+        getOtp,
+        checkOtp,
+        completeProfile,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const context = use(AuthContext);
+  if (context === undefined) throw new Error("not found Auth context");
+
+  return context;
+}

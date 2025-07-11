@@ -23,7 +23,7 @@ function Header() {
         </div>
         <div className="w-1/2 flex justify-end">
           <li>
-            <NavLink path="/auth" active="bg-primary-400">
+            <NavLink path="/signin" active="bg-primary-400">
               ورود | ثبت نام
             </NavLink>
           </li>
