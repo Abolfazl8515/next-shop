@@ -5,7 +5,7 @@ import StepperProvider, { useStepper } from "../_context/StepperProvider";
 import { stepperData } from "@/constants/stepperData";
 
 function AuthLayoutClientUi({ children }) {
-  const { step, setStep } = useStepper();
+  const { step } = useStepper();
 
   return (
     <main className="w-full h-screen overflow-hidden flex justify-between items-center">

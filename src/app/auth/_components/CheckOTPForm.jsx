@@ -9,24 +9,28 @@ import { useYupValidationResolver } from "@/hooks/useYupValidationResolver";
 
 const schema = yup
   .object({
-    phoneNumber: yup
+    otp: yup
       .string()
       .required("لطفا یک شماره موبایل وارد کنید")
       .length(11, "شماره موبایل باید 11 رقم باشد"),
   })
   .required();
 
-function SignIn() {
+function CheckOTPForm() {
   const resolver = useYupValidationResolver(schema);
   const {
     handleSubmit,
     register,
     formState: { errors, isLoading },
   } = useForm({ resolver, mode: "onTouched" });
-  const { getOtp } = useAuth();
+  const { checkOtp, user } = useAuth();
 
   const submitHandler = async (values) => {
-    await getOtp(values);
+    const userValue = {
+      phoneNumber: user,
+      otp: values.otp,
+    };
+    await checkOtp(userValue);
   };
 
   return (
@@ -35,8 +39,8 @@ function SignIn() {
         <TextField
           type="tel"
           isRequired
-          name="phoneNumber"
-          label="شماره موبایل"
+          name="otp"
+          label="لطفا کد ارسال شده به شماره را وارد کنید"
           register={register}
           errors={errors}
           dir="ltr"
@@ -55,4 +59,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default CheckOTPForm;

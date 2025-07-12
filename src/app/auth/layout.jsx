@@ -1,4 +1,4 @@
-import AuthLayoutClient from "./signin/_components/AuthLayoutClient ";
+import AuthLayoutClient from "./_components/AuthLayoutClient ";
 
 export const metadata = {
   title: "ورود",

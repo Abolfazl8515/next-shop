@@ -42,6 +42,7 @@ const reducer = (state, action) => {
     case GET_OTP:
       return {
         ...state,
+        user: action.payload,
         isLoading: false,
       };
     case CHECK_OTP:
@@ -83,12 +84,11 @@ export default function AuthProvider({ children }) {
   const getOtp = async (values) => {
     dispatch({ type: LOADING });
     try {
-      const { message } = getUserOtpApi(values);
-      dispatch({ type: GET_OTP });
-      router.push("/signin/check-otp");
+      const { message, phoneNumber } = await getUserOtpApi(values);
       toast(message, {
         icon: "ℹ️",
       });
+      dispatch({ type: GET_OTP, payload: phoneNumber });
     } catch (error) {
       const errMsg = error?.response?.data?.message;
       dispatch({ type: REJECTED, payload: errMsg });
@@ -99,9 +99,8 @@ export default function AuthProvider({ children }) {
   const checkOtp = async (values) => {
     dispatch({ type: LOADING });
     try {
-      const { message, user } = checkUserOtpApi(values);
+      const { message, user } = await checkUserOtpApi(values);
       dispatch({ type: CHECK_OTP, payload: user });
-      router.push("/signin/complete-profile");
       toast.success(message);
     } catch (error) {
       const errMsg = error?.response?.data?.message;
@@ -113,7 +112,7 @@ export default function AuthProvider({ children }) {
   const completeProfile = async (values) => {
     dispatch({ type: LOADING });
     try {
-      const { message, user } = completeUserProfileApi(values);
+      const { message, user } = await completeUserProfileApi(values);
       dispatch({ type: COMPLETE_PROFILE, payload: user });
       router.replace("/");
       toast.success(message);
