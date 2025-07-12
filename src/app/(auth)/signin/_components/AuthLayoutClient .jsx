@@ -2,21 +2,7 @@
 import Lottie from "lottie-react";
 import authAnimation from "@/lotties/auth_tree_animation.json";
 import StepperProvider, { useStepper } from "../_context/StepperProvider";
-
-const stepperData = [
-  {
-    id: 1,
-    title: "شماره موبایل",
-  },
-  {
-    id: 2,
-    title: "وارد کردن کد تایید ",
-  },
-  {
-    id: 3,
-    title: "تکمیل اطلاعات",
-  },
-];
+import { stepperData } from "@/constants/stepperData";
 
 function AuthLayoutClientUi({ children }) {
   const { step, setStep } = useStepper();
