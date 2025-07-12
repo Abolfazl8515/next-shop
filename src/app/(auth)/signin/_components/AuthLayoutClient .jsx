@@ -1,7 +1,7 @@
 "use client";
 import Lottie from "lottie-react";
 import authAnimation from "@/lotties/auth_tree_animation.json";
-import { useState } from "react";
+import StepperProvider, { useStepper } from "../_context/StepperProvider";
 
 const stepperData = [
   {
@@ -18,8 +18,8 @@ const stepperData = [
   },
 ];
 
-function AuthLayoutClient({ children }) {
-  const [step, setStep] = useState(1);
+function AuthLayoutClientUi({ children }) {
+  const { step, setStep } = useStepper();
 
   return (
     <main className="w-full h-screen overflow-hidden flex justify-between items-center">
@@ -51,9 +51,7 @@ function AuthLayoutClient({ children }) {
                   </div>
                   <span
                     className={`${
-                      item.id === step
-                        ? "text-secondary-0"
-                        : "text-primary-500"
+                      item.id === step ? "text-secondary-0" : "text-primary-500"
                     } mt-2`}
                   >
                     {item.title}
@@ -80,6 +78,15 @@ function AuthLayoutClient({ children }) {
         </div>
       </section>
     </main>
+  );
+}
+
+// wrap context
+function AuthLayoutClient({ children }) {
+  return (
+    <StepperProvider>
+      <AuthLayoutClientUi>{children}</AuthLayoutClientUi>
+    </StepperProvider>
   );
 }
 
