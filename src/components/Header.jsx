@@ -1,6 +1,11 @@
+"use client";
+import { useAuth } from "@/context/AuthProvider";
 import NavLink from "./NavLink";
+import ButtonIcon from "@/ui/ButtonIcon";
+import { UserIcon } from "@heroicons/react/24/outline";
 
 function Header() {
+  const { user } = useAuth();
   return (
     <div className="w-3/4 h-16 mx-auto my-2 p-3 bg-primary-700 rounded-3xl">
       <ul className="flex justify-between items-center px-1">
@@ -23,9 +28,18 @@ function Header() {
         </div>
         <div className="w-1/2 flex justify-end">
           <li>
-            <NavLink path="/auth" active="bg-primary-400">
-              ورود | ثبت نام
-            </NavLink>
+            {user ? (
+              <NavLink path="/profile">
+                <ButtonIcon variant="primary" className="cursor-pointer">
+                  پروفایل کاربری
+                  <UserIcon />
+                </ButtonIcon>
+              </NavLink>
+            ) : (
+              <NavLink path="/auth" active="bg-primary-400">
+                ورود | ثبت نام
+              </NavLink>
+            )}
           </li>
         </div>
       </ul>

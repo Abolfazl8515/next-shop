@@ -1,11 +1,12 @@
 "use client";
 
 import CheckOTPForm from "./_components/CheckOTPForm";
+import CompleteProfile from "./_components/CompleteProfile";
 import SendOTPForm from "./_components/SendOTPForm";
 import { useStepper } from "./_context/StepperProvider";
 
 function SignIn() {
-  const { step, setStep } = useStepper();
+  const { step } = useStepper();
 
   const renderStep = () => {
     switch (step) {

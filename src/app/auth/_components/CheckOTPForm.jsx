@@ -13,8 +13,8 @@ const schema = yup
   .object({
     otp: yup
       .string()
-      .required("لطفا یک شماره موبایل وارد کنید")
-      .length(11, "شماره موبایل باید 11 رقم باشد"),
+      .required("لطفا کد ارسال شده را وارد کنید")
+      .length(6, "کد ارسالی باید 6 رقم باشد"),
   })
   .required();
 
@@ -34,6 +34,7 @@ function CheckOTPForm() {
       otp: values.otp,
     };
     await checkOtp(userValue);
+    setStep((prev) => prev + 1);
   };
 
   return (
