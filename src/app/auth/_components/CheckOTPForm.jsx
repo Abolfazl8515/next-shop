@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { useAuth } from "@/context/AuthProvider";
 import SpinnerMini from "@/ui/SpinnerMini";
 import { useYupValidationResolver } from "@/hooks/useYupValidationResolver";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { useStepper } from "../_context/StepperProvider";
 
 const schema = yup
   .object({
@@ -24,6 +26,7 @@ function CheckOTPForm() {
     formState: { errors, isLoading },
   } = useForm({ resolver, mode: "onTouched" });
   const { checkOtp, user } = useAuth();
+  const { setStep } = useStepper();
 
   const submitHandler = async (values) => {
     const userValue = {
@@ -35,16 +38,24 @@ function CheckOTPForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(submitHandler)} className="space-y-10">
-        <TextField
-          type="tel"
-          isRequired
-          name="otp"
-          label="لطفا کد ارسال شده به شماره را وارد کنید"
-          register={register}
-          errors={errors}
-          dir="ltr"
-        />
+      <form onSubmit={handleSubmit(submitHandler)} className="space-y-4">
+        <div
+          className="flex gap-x-3 mt-2 cursor-pointer"
+          onClick={() => setStep((prev) => prev - 1)}
+        >
+          <ArrowRightIcon className="w-5 h-5" />
+        </div>
+        <div>
+          <TextField
+            type="tel"
+            isRequired
+            name="otp"
+            label={`لطفا کد ارسال شده به شماره ${user} را وارد کنید`}
+            register={register}
+            errors={errors}
+            dir="ltr"
+          />
+        </div>
         <div>
           {isLoading ? (
             <SpinnerMini />

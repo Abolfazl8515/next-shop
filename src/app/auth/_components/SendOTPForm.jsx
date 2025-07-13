@@ -19,12 +19,16 @@ const schema = yup
 
 function SendOTPForm() {
   const resolver = useYupValidationResolver(schema);
+  const { getOtp, user } = useAuth();
   const {
     handleSubmit,
     register,
     formState: { errors, isLoading },
-  } = useForm({ resolver, mode: "onTouched" });
-  const { getOtp } = useAuth();
+  } = useForm({
+    resolver,
+    mode: "onTouched",
+    defaultValues: { phoneNumber: user || "" },
+  });
   const { setStep } = useStepper();
 
   const submitHandler = async (values) => {
