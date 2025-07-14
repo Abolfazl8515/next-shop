@@ -9,8 +9,8 @@ function AuthLayoutClientUi({ children }) {
 
   return (
     <main className="w-full h-screen overflow-hidden flex justify-between items-center">
-      <section className="w-2/6 relative flex items-center">
-        <div className="absolute -left-2/5 w-96 h-96 rounded-2xl bg-secondary-0">
+      <section className="lg:w-2/6 md:w-1/2 mobile:w-3/4 w-2/3 lg:relative flex items-center justify-center lg:justify-start md:p-0 p-3">
+        <div className="lg:absolute lg:-left-2/5 w-96 h-96 rounded-2xl bg-secondary-0">
           <div className="w-11/12 flex flex-col">
             <h3 className="w-full text-center mt-10 text-2xl font-black text-secondary-800">
               برگستان
@@ -22,9 +22,9 @@ function AuthLayoutClientUi({ children }) {
           </div>
         </div>
       </section>
-      <section className="w-2/3 h-full flex justify-center items-center bg-primary-700 rounded-tr-2xl rounded-br-2xl">
-        <div className="w-full h-5/6 flex flex-col items-center">
-          <div className="flex h-3/12">
+      <section className="lg:w-2/3 md:w-1/2 mobeile:w-1/4 w-1/3 h-full flex justify-center items-center bg-primary-700 rounded-tr-2xl rounded-br-2xl">
+        <div className="w-full h-5/6 flex flex-col items-center lg:justify-start justify-around">
+          <div className="flex h-3/12 lg:flex-row flex-col gap-y-2 lg:gap-y-0">
             {stepperData.map((item) => (
               <div className="flex justify-center items-center" key={item.id}>
                 <div className="flex flex-col items-center justify-center">
@@ -38,14 +38,14 @@ function AuthLayoutClientUi({ children }) {
                   <span
                     className={`${
                       item.id === step ? "text-secondary-0" : "text-primary-500"
-                    } mt-2`}
+                    } mt-2 md:text-base text-xs`}
                   >
                     {item.title}
                   </span>
                 </div>
                 {item.id !== 3 && (
                   <div
-                    className={`mobile:w-16 w-10 h-px -mt-4 ${
+                    className={`w-10 h-px -mt-4 lg:block hidden ${
                       item.id === step ? "bg-primary-200" : "bg-secondary-200"
                     }`}
                   ></div>
@@ -53,11 +53,11 @@ function AuthLayoutClientUi({ children }) {
               </div>
             ))}
           </div>
-          <div className="w-3/12">
+          <div className="w-3/12 hidden lg:block">
             <Lottie autoPlay loop animationData={authAnimation} />
           </div>
           <div className="h-3/12 mt-7">
-            <h2 className="font-bold text-2xl text-secondary-50">
+            <h2 className="font-bold md:text-2xl text-base text-secondary-50">
               فروش نهال انار
             </h2>
           </div>
