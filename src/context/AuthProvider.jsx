@@ -4,6 +4,7 @@ import {
   completeUserProfileApi,
   getUserApi,
   getUserOtpApi,
+  logoutApi,
 } from "@/services/authService";
 import { useRouter } from "next/navigation";
 import { createContext, use, useEffect, useReducer } from "react";
