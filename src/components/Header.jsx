@@ -7,7 +7,7 @@ import { UserIcon } from "@heroicons/react/24/outline";
 function Header() {
   const { user } = useAuth();
   return (
-    <div className="w-3/4 h-16 mx-auto my-2 p-3 bg-primary-700 rounded-3xl">
+    <div className="w-3/4 h-16 mx-auto my-2 p-3 bg-primary-500 rounded-3xl">
       <ul className="flex justify-between items-center px-1">
         <div className="w-1/2 flex justify-around">
           <li>
@@ -16,12 +16,12 @@ function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink path="/products" active="bg-primary-400">
+            <NavLink path="/products" active="bg-primary-600 rounded-[28px]">
               محصولات
             </NavLink>
           </li>
           <li>
-            <NavLink path="/about" active="bg-primary-400">
+            <NavLink path="/about" active="bg-primary-600 rounded-[28px]">
               درباره ما
             </NavLink>
           </li>
