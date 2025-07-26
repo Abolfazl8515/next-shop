@@ -24,11 +24,13 @@ function CategoryList({ categories }) {
       setSelectedCategories([...selectedCategories, value]);
       search.set("category", [...selectedCategories, value]);
     }
-    replace(`${pathName}?${search.toString()}`);
+    search.get("category")
+      ? replace(`${pathName}?${search.toString()}`)
+      : replace(pathName);
   };
 
   return (
-    <ul className="space-y-3 flex items-center justify-center flex-col">
+    <ul className="space-y-3 flex items-center justify-center flex-col bg-primary-500 p-4 rounded-4xl">
       <li className="text-secondary-700">
         <Link href="/blogs" className="w-full h-full">
           همه

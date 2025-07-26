@@ -19,9 +19,9 @@ async function ProductsLayout({ children }) {
             <CategoryList categories={categories} />
           </div>
         </div>
-        <div className="col-span-12 lg:col-span-8 xl:col-span-9">
+        <main className="col-span-12 lg:col-span-8 xl:col-span-9">
           {children}
-        </div>
+        </main>
       </div>
     </div>
   );

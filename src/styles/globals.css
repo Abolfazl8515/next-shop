@@ -101,6 +101,17 @@ body {
   animation: rotate 1s infinite linear;
 }
 
+.form-checkbox {
+  appearance: none;
+  background: var(--color-secondary-50);
+}
+
+.form-checkbox:checked {
+  background: rgb(74, 109, 255);
+  color: white;
+  background-image: url(../../public/images/check.svg);
+}
+
 @keyframes rotate {
   to {
     transform: rotate(1turn);
