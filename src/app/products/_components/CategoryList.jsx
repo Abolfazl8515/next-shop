@@ -32,7 +32,7 @@ function CategoryList({ categories }) {
   return (
     <ul className="space-y-3 flex items-center justify-center flex-col bg-primary-500 p-4 rounded-4xl">
       <li className="text-secondary-700">
-        <Link href="/blogs" className="w-full h-full">
+        <Link href="/products" className="w-full h-full">
           همه
         </Link>
       </li>
