@@ -1,7 +1,5 @@
 import http from "./httpService";
 
-export async function getProducts(options, query = "") {
-  return http
-    .get(`/product/list?${query}`, options)
-    .then(({ data }) => data.data);
+export async function getProductsApi(query = "") {
+  return http.get(`/product/list?${query}`).then(({ data }) => data.data);
 }
