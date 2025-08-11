@@ -1,8 +1,8 @@
 import CoverImage from "./CoverImage";
 import Link from "next/link";
-import Button from "@/ui/Button";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
+import AddToCart from "./AddToCart";
 
 function ProductList({ products }) {
   return products?.map((product) => (
@@ -23,9 +23,7 @@ function ProductList({ products }) {
           </h4>
         </Link>
         <div className="w-full flex justify-between items-center">
-          <Button className="text-[13px]" variant="primary">
-            افزودن به سبد خرید
-          </Button>
+          <AddToCart id={product._id} />
           <div className="flex items-center gap-x-1">
             <span className="text-xl font-black text-secondary-700">
               {toPersianNumbersWithComma(product.price)}

@@ -22,6 +22,7 @@ const AuthContext = createContext();
 
 const initialState = {
   user: null,
+  cart: null,
   isAuthenticated: false,
   isLoading: true,
   error: null,
@@ -61,7 +62,8 @@ const reducer = (state, action) => {
     case USER_LOADED:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
+        cart: action.payload.cart,
         isLoading: false,
       };
     case LOGOUT:
@@ -76,7 +78,7 @@ const reducer = (state, action) => {
 };
 
 export default function AuthProvider({ children }) {
-  const [{ user, isAuthenticated, isLoading }, dispatch] = useReducer(
+  const [{ user, cart, isAuthenticated, isLoading }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -127,8 +129,8 @@ export default function AuthProvider({ children }) {
   const getUser = async () => {
     dispatch({ type: LOADING });
     try {
-      const { user } = await getUserApi();
-      dispatch({ type: USER_LOADED, payload: user });
+      const { user, cart } = await getUserApi();
+      dispatch({ type: USER_LOADED, payload: { user, cart } });
     } catch (error) {
       const errorMsg = error?.response?.data?.message;
       dispatch({ type: REJECTED, payload: errorMsg });
@@ -161,6 +163,7 @@ export default function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        cart,
         isAuthenticated,
         isLoading,
         getOtp,
