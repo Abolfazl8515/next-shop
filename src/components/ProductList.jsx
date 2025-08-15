@@ -23,7 +23,7 @@ function ProductList({ products }) {
           </h4>
         </Link>
         <div className="w-full flex justify-between items-center">
-          <AddToCart id={product._id} />
+          <AddToCart id={product._id} className="w-1/2 text-[13px]" />
           <div className="flex items-center gap-x-1">
             <span className="text-xl font-black text-secondary-700">
               {toPersianNumbersWithComma(product.price)}

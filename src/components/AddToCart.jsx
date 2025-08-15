@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-function AddToCart({ id }) {
+function AddToCart({ id, className }) {
   const { user } = useAuth();
   const { push } = useRouter();
   const [loading, setLoading] = useState(false);
@@ -31,11 +31,7 @@ function AddToCart({ id }) {
   };
 
   return (
-    <Button
-      className="text-[13px] w-1/2"
-      variant="primary"
-      onClick={addToCartHandler}
-    >
+    <Button className={className} variant="primary" onClick={addToCartHandler}>
       {loading ? <SpinnerMini /> : "افزودن به سبد خرید"}
     </Button>
   );
