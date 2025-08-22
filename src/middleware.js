@@ -13,8 +13,15 @@ export async function middleware(req) {
     const user = await middleWareAuth(req);
     if (!user) return NextResponse.redirect(new URL(`/auth`, req.url));
   }
+
+  if (pathname.startsWith("/admin")) {
+    const user = await middleWareAuth(req);
+    if (!user) return NextResponse.redirect(new URL(`/auth`, req.url));
+    else if (user.role !== "ADMIN")
+      NextResponse.redirect(new URL("/"), req.url);
+  }
 }
 
 export const config = {
-  matcher: ["/profile/:path*", "/auth"],
+  matcher: ["/profile/:path*", "/auth", "/admin/:path*"],
 };

@@ -1,39 +1,34 @@
 import ProfileHeader from "@/components/ProfileHeader";
 import SideBar from "@/components/SideBar";
 import {
+  BuildingStorefrontIcon,
   RectangleGroupIcon,
-  ShoppingCartIcon,
-  UserIcon,
+  UsersIcon,
 } from "@heroicons/react/24/outline";
-
-export const metadata = {
-  title: "پروفایل",
-  description: "پروفایل",
-};
 
 const options = [
   {
     id: 1,
     title: "داشبورد",
     icon: <RectangleGroupIcon className="w-5 h-5" />,
-    href: "/profile",
+    href: "/admin",
   },
 
   {
     id: 2,
-    title: "سبد خرید",
-    icon: <ShoppingCartIcon className="w-5 h-5" />,
-    href: "/profile/cart",
+    title: "محصولات",
+    icon: <BuildingStorefrontIcon className="w-5 h-5" />,
+    href: "/admin/products",
   },
   {
     id: 3,
-    title: "اطلاعات من",
-    icon: <UserIcon className="w-5 h-5" />,
-    href: "/profile/me",
+    title: "کاربران",
+    icon: <UsersIcon className="w-5 h-5" />,
+    href: "/admin/users",
   },
 ];
 
-function ProfileLayout({ children }) {
+function AdminLayout({ children }) {
   return (
     <div className="w-11/12 bg-secondary-200">
       <div className="w-full grid grid-cols-12 overflow-hidden py-3 gap-3 h-screen">
@@ -53,4 +48,4 @@ function ProfileLayout({ children }) {
   );
 }
 
-export default ProfileLayout;
+export default AdminLayout;

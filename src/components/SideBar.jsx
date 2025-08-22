@@ -2,37 +2,12 @@
 import {
   ArrowLeftStartOnRectangleIcon,
   HomeIcon,
-  RectangleGroupIcon,
-  ShoppingCartIcon,
-  UserIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthProvider";
 import SideBarNav from "./SideBarNav";
 
-const options = [
-  {
-    id: 1,
-    title: "داشبورد",
-    icon: <RectangleGroupIcon className="w-5 h-5" />,
-    href: "/profile",
-  },
-
-  {
-    id: 2,
-    title: "سبد خرید",
-    icon: <ShoppingCartIcon className="w-5 h-5" />,
-    href: "/profile/cart",
-  },
-  {
-    id: 3,
-    title: "اطلاعات من",
-    icon: <UserIcon className="w-5 h-5" />,
-    href: "/profile/me",
-  },
-];
-
-function SideBar() {
+function SideBar({ options }) {
   const { logout } = useAuth();
 
   return (
