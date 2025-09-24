@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import * as yup from "yup";
 import toast from "react-hot-toast";
 import Spinner from "@/ui/Loading";
-import { addOneProduct } from "@/services/productsService";
+import { addOneProductApi } from "@/services/productsService";
 import { useYupValidationResolver } from "@/hooks/useYupValidationResolver";
 
 const schema = yup
@@ -83,7 +83,7 @@ function CreateProductForm({ postToEdit = {}, categories }) {
       );
     } else {
       try {
-        const { message } = await addOneProduct({
+        const { message } = await addOneProductApi({
           ...data,
           offPrice,
           brand: "apple",
