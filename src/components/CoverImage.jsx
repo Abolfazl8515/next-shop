@@ -4,7 +4,7 @@ function CoverImage({ imageLink, title, priority = false }) {
   return (
     <div className="aspect-video relative overflow-hidden mb-6 rounded-md">
       <Image
-        src={`http://localhost:5000/${imageLink}`}
+        src={imageLink}
         alt={title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
