@@ -10,7 +10,7 @@ async function ProductsPage() {
     return (
       <>
         <ProductsHeader />
-        <p className="text-secondary-500">پستی وجود ندارد</p>
+        <p className="text-secondary-500">محصولی وجود ندارد</p>
       </>
     );
   }
