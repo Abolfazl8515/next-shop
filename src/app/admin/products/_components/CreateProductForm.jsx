@@ -8,8 +8,12 @@ import { useRouter } from "next/navigation";
 import * as yup from "yup";
 import toast from "react-hot-toast";
 import Spinner from "@/ui/Loading";
-import { addOneProductApi } from "@/services/productsService";
+import {
+  addOneProductApi,
+  updateOneProductApi,
+} from "@/services/productsService";
 import { useYupValidationResolver } from "@/hooks/useYupValidationResolver";
+import { useState } from "react";
 
 const schema = yup
   .object({
@@ -40,19 +44,29 @@ const schema = yup
   })
   .required();
 
-function CreateProductForm({ postToEdit = {}, categories }) {
+function CreateProductForm({ productToEdit = {}, categories }) {
+  const [isLoading, setIsLoading] = useState(false);
   const resolver = useYupValidationResolver(schema);
-  const isEditSession = Boolean(postToEdit._id);
+  const isEditSession = Boolean(productToEdit._id);
   let editValues = {};
-  const { title, briefText, text, slug, readingTime, category, imageLink } =
-    postToEdit;
+  const {
+    title,
+    description,
+    price,
+    discount,
+    countInStock,
+    slug,
+    category,
+    imageLink,
+  } = productToEdit;
   if (isEditSession) {
     editValues = {
       title,
-      briefText,
-      text,
+      description,
+      price,
+      discount,
+      countInStock,
       slug,
-      readingTime,
       category: category?._id,
       imageLink,
     };
@@ -60,7 +74,7 @@ function CreateProductForm({ postToEdit = {}, categories }) {
 
   const {
     register,
-    formState: { errors, isLoading },
+    formState: { errors },
     handleSubmit,
     reset,
   } = useForm({
@@ -71,16 +85,22 @@ function CreateProductForm({ postToEdit = {}, categories }) {
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    const offPrice = data.price - data.discount;
+    setIsLoading(true);
+    const discountCalc = (data.price * data.discount) / 100;
+    const offPrice = data.price - discountCalc;
     if (isEditSession) {
-      editPost(
-        { id: postToEdit._id, data: formData },
-        {
-          onSuccess: () => {
-            router.push("/profile/posts");
-          },
-        }
-      );
+      const editedData = { ...data, offPrice };
+      try {
+        const { message } = await updateOneProductApi({
+          id: productToEdit._id,
+          data: editedData,
+        });
+        toast.success(message);
+        reset();
+        router.push("/admin/products");
+      } catch (err) {
+        toast.error(err?.response?.data?.message);
+      }
     } else {
       try {
         const { message } = await addOneProductApi({
@@ -95,6 +115,7 @@ function CreateProductForm({ postToEdit = {}, categories }) {
         toast.error(err?.response?.data?.message);
       }
     }
+    setIsLoading(false);
   };
 
   return (

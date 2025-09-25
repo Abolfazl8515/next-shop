@@ -1,5 +1,6 @@
 import Table from "@/ui/Table";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
+import { DeleteButton, UpdateButton } from "./Buttons";
 
 function ProductsRow({ products }) {
   return products.map((product, index) => (
@@ -13,12 +14,12 @@ function ProductsRow({ products }) {
       <td>{product.discount}%</td>
       <td>{toPersianNumbersWithComma(product.offPrice)}</td>
       <td>{product.countInStock}</td>
-      {/* <td>
+      <td>
         <div className="flex gap-x-3">
           <UpdateButton id={product._id} />
           <DeleteButton id={product._id} productTitle={product.title} />
         </div>
-      </td> */}
+      </td>
     </Table.Row>
   ));
 }

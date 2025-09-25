@@ -10,10 +10,10 @@ async function CreateProduct() {
     <div>
       <Breadcrumbs
         Breadcrumbs={[
-          { label: "پست ها", href: "/profile/posts" },
+          { label: "محصولات", href: "/admin/products" },
           {
-            label: "اضافه کردن پست",
-            href: `/profile/posts/create`,
+            label: "اضافه کردن محصول",
+            href: `/admin/products/create`,
             active: true,
           },
         ]}
