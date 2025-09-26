@@ -169,6 +169,7 @@ export default function AuthProvider({ children }) {
         getOtp,
         checkOtp,
         completeProfile,
+        getUser,
         logout,
       }}
     >
