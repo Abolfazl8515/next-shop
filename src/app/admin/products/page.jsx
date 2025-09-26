@@ -4,8 +4,12 @@ import Spinner from "@/ui/Loading";
 import { getProductsApi } from "@/services/productsService";
 import LatestProducts from "./_components/LatestProducts";
 
-async function ProductsPage() {
-  const { products } = await getProductsApi();
+async function ProductsPage({ searchParams }) {
+  const search = await searchParams;
+  const sort = search.sort;
+  const query = sort ? `sort=${sort}` : "sort=latest";
+
+  const { products } = await getProductsApi(query);
   if (products.length === 0) {
     return (
       <>
