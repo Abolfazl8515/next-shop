@@ -8,7 +8,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 function AddToCart({ id, className }) {
-  const { user } = useAuth();
+  const { user, getUser } = useAuth();
   const { push } = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +23,7 @@ function AddToCart({ id, className }) {
       setLoading(true);
       const { message } = await addToCartApi({ productId: id });
       toast.success(message);
+      getUser();
     } catch (err) {
       toast.error(err?.response?.data?.message);
     } finally {
