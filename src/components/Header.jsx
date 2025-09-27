@@ -7,6 +7,7 @@ import { toPersianNumbers } from "@/utils/toPersianNumbers";
 
 function Header() {
   const { user, cart, isLoading } = useAuth();
+  const profilePath = user?.role === "ADMIN" ? "/admin" : "/profile";
   return (
     <div className="w-3/4 h-16 mx-auto my-2 p-3 bg-primary-500 rounded-3xl">
       <ul className="flex justify-between items-center px-1">
@@ -38,7 +39,7 @@ function Header() {
           </li>
           <li>
             {user ? (
-              <NavLink path="/profile">
+              <NavLink path={profilePath}>
                 <ButtonIcon variant="primary" className="cursor-pointer">
                   پروفایل کاربری
                   <UserIcon />
