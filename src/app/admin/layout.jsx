@@ -3,6 +3,7 @@ import SideBar from "@/components/SideBar";
 import {
   BuildingStorefrontIcon,
   RectangleGroupIcon,
+  TagIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 
@@ -13,7 +14,6 @@ const options = [
     icon: <RectangleGroupIcon className="w-5 h-5" />,
     href: "/admin",
   },
-
   {
     id: 2,
     title: "محصولات",
@@ -22,6 +22,12 @@ const options = [
   },
   {
     id: 3,
+    title: "دسته بندی ها",
+    icon: <TagIcon className="w-5 h-5" />,
+    href: "/admin/categories",
+  },
+  {
+    id: 4,
     title: "کاربران",
     icon: <UsersIcon className="w-5 h-5" />,
     href: "/admin/users",
