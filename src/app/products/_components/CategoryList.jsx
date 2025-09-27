@@ -30,7 +30,7 @@ function CategoryList({ categories }) {
   };
 
   return (
-    <ul className="space-y-3 flex items-center justify-center flex-col bg-primary-500 p-4 rounded-4xl">
+    <ul className="w-full space-y-3 flex items-center justify-center flex-col bg-primary-500 p-4 rounded-4xl">
       <li className="text-secondary-700">
         <Link href="/products" className="w-full h-full">
           همه
@@ -38,7 +38,7 @@ function CategoryList({ categories }) {
       </li>
       {categories?.map((item) => (
         <li
-          className="w-full h-10 flex items-center justify-center bg-primary-400 text-secondary-700 rounded-2xl"
+          className="w-11/12 h-10 flex items-center justify-center bg-primary-400 text-secondary-700 rounded-2xl"
           key={item._id}
         >
           <CheckBox
