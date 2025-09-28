@@ -105,6 +105,10 @@ export default function AuthProvider({ children }) {
       const { message, user } = await checkUserOtpApi(values);
       dispatch({ type: CHECK_OTP, payload: user });
       toast.success(message);
+      if (user?.isActive) {
+        router.replace("/");
+        getUser();
+      }
     } catch (error) {
       const errMsg = error?.response?.data?.message;
       dispatch({ type: REJECTED, payload: errMsg });

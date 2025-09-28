@@ -30,12 +30,14 @@ function Header() {
         </div>
         <div className="w-1/2 flex items-center justify-end">
           <li className="relative">
-            <NavLink path="/cart">
-              <span className="absolute w-5 h-5 flex justify-center items-center rounded-full -top-1 -right-2 bg-rose-500 text-secondary-50">
-                {!isLoading && toPersianNumbers(cart?.productDetail.length)}
-              </span>
-              <ShoppingCartIcon className="w-6 h-6 text-secondary-50" />
-            </NavLink>
+            {user && (
+              <NavLink path="/cart">
+                <span className="absolute w-5 h-5 flex justify-center items-center rounded-full -top-1 -right-2 bg-rose-500 text-secondary-50">
+                  {!isLoading && toPersianNumbers(cart?.productDetail.length)}
+                </span>
+                <ShoppingCartIcon className="w-6 h-6 text-secondary-50" />
+              </NavLink>
+            )}
           </li>
           <li>
             {user ? (
