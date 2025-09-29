@@ -101,6 +101,19 @@ body {
   animation: rotate 1s infinite linear;
 }
 
+.inverted {
+  clip-path: path(
+    "M0,0H700A0,0 0,0,1 700,0V270A10,10 0,0,1 690,280H680A10,10 0,0,0 670,290V290A10,10 0,0,1 660,300H30A10,10 0,0,1 20,290V290A10,10 0,0,0 10,280H10A10,10 0,0,1 0,270V40A10,10 0,0,1 10,30H40A10,10 0,0,0 50,20V10A10,10 0,0,1 60,0"
+  );
+  width: 700px;
+  height: 300px;
+  background: url("../../public/images/5967570218857384021.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  aspect-ratio: 7 / 3;
+}
+
 .form-checkbox {
   appearance: none;
   background: var(--color-secondary-50);
