@@ -1,20 +1,11 @@
+"use client";
 import CoverImage from "./CoverImage";
 import Link from "next/link";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 import AddToCart from "./AddToCart";
-import { getProductsApi } from "@/services/productsService";
-import Empty from "@/ui/Empty";
 
-async function ProductList({ searchParams }) {
-  const search = await searchParams;
-  const category = search?.category;
-  const query = category ? `category=${category}` : "";
-  const { products } = await getProductsApi(query);
-
-  if (products.length === 0) {
-    return <Empty message="محصولی وجود ندارد" />;
-  }
+function ProductList({ products }) {
   return products?.map((product) => (
     <div key={product._id} className="w-2/6">
       <Link href={`/products/${product.slug}`}>
