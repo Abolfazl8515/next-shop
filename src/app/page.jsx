@@ -1,7 +1,10 @@
+"use client";
 import MainLayout from "@/components/MainLayout";
-import ProductList from "@/components/ProductList";
 import Button from "@/ui/Button";
+import Lottie from "lottie-react";
+import landingAnimation from "@/lotties/auth_tree_animation.json";
 import Link from "next/link";
+import LatestProductsHome from "@/components/LatestProductsHome";
 
 export default function Home() {
   return (
@@ -19,7 +22,19 @@ export default function Home() {
             آخرین محصولات
           </h3>
           <div className="w-full h-auto flex flex-wrap gap-1 mt-10">
-            <ProductList />
+            <LatestProductsHome />
+          </div>
+        </section>
+        <section>
+          <div>
+            <h3>نهال رو مستقیم از باغدار بخر</h3>
+            <p>
+              خرید مستقیم از باغدار بدون واسطه هم قیمتش ارزون تره هم حمایت بزرگی
+              میشه از صنعت کشاورزی کشور
+            </p>
+          </div>
+          <div className="w-1/2">
+            <Lottie autoPlay loop animationData={landingAnimation} />
           </div>
         </section>
       </main>
