@@ -14,7 +14,7 @@ export default function Home() {
         <section className="w-full text-center">
           <div className="inverted mt-10 mx-auto"></div>
           <h1 className="mt-4 font-black text-3xl text-secondary-600">
-            هر نهالی بخوای ما داریم از هر درختی با تضمین کیفیت (:
+            فروش تخصصی نهال انار با تضمین کیفیت و قیمت به صرفه (:
           </h1>
           <Button variant="primary" className="text-2xl mt-4">
             <Link href="/products">رفتن به فروشگاه✌️</Link>
